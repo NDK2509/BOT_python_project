@@ -1,5 +1,7 @@
 from random import sample
 from datetime import time
+from tkinter import *
+from tkinter import ttk
 
 #Constant
 MON = 0
@@ -12,7 +14,7 @@ SUN = 6
 DAY_OF_WEEK = 7
 #-------------------------------------------------
 class Work:
-    def __init__(self, work = str(), time = time()):
+    def __init__(self, work, time):
         self._work = work
         self._time = time
     def getWork(self):
@@ -26,17 +28,16 @@ class Work:
     def show(self):
         print('Work name:', self._work,', time:', self._time)
 
-def timeTable(toDoList = list()):
+def timeTable(toDoList):
     def odd(n):
         if (n % 2 == 0): return False
         return True
 
     mark = [[],[],[],[],[],[],[]]
-    
+
     for day in range(DAY_OF_WEEK):
         works_a_day = len(toDoList[day])
         n = works_a_day//2
-
         if (odd(works_a_day)):
             work_per_person = sample([n, n + 1], k = 2, counts = [1,1])
         else:
@@ -44,24 +45,34 @@ def timeTable(toDoList = list()):
         mark[day] = sample([True, False], k = works_a_day, counts = work_per_person)
     
     return mark
-def sortTimeTable(toDoList = list()):
+
+def sortTime(toDoList):
+    def sort(list_work):
+        for i in range(len(list_work)-1):
+            for j in range(len(list_work)-i-1):
+                if list_work[j].getTime() > list_work[j+1].getTime():
+                    list_work[j], list_work[j+1] = list_work[j+1], list_work[j]
     for day in range(DAY_OF_WEEK):
-        sorted()
+        sort(toDoList[day])
+        
 def addWork(toDoList, day, work):
     toDoList[day].append(work)
 
+def index_day(day):
+    if day == 'Mon': return MON
+    elif day == 'Tue': return TUE
+    elif day == 'Wed': return WED
+    elif day == 'Thu': return THU
+    elif day == 'Fri': return FRI
+    elif day == 'Sar': return SAR
+    elif day == 'Sun': return SUN
+def showToDo(toDoList):
+    for day in range(DAY_OF_WEEK):
+        print(day,":")
+        for work in toDoList[day]:
+            work.show()
 #---------------------begin------------------------
-todo = [
-    [Work('Watering', time(5,30)), Work('Cooking breakfast', time(6)), Work('Cooking', time(11,30)),Work('Picking child up', time(17,30))],
-    [Work('Watering', time(5,30)), Work('Cooking breakfast', time(6)), Work('Cooking', time(11))],
-    [Work('Watering', time(5,30)), Work('Cooking breakfast', time(6))],
-    [Work('Watering', time(5,30)), Work('Cooking breakfast', time(6))],
-    [Work('Watering', time(5,30)), Work('Cooking breakfast', time(6))],
-    [Work('Watering', time(5,30)), Work('Cooking breakfast', time(6))],
-    [Work('Watering', time(5,30)), Work('Cooking breakfast', time(6))]
-]
 
-addWork(todo, WED, Work('Laundry', time(21,30)))
-todo[WED][2].show()
-#mark = timeTable(todo)
-#print(mark)
+toDoList = [[],[],[],[],[],[],[]]
+mark = list()
+
