@@ -9,7 +9,7 @@ TUE = 1
 WED = 2
 THU = 3
 FRI = 4
-SAR = 5
+SAT = 5
 SUN = 6
 DAY_OF_WEEK = 7
 #-------------------------------------------------
@@ -27,6 +27,8 @@ class Work:
         self._time = newTime
     def show(self):
         print('Work name:', self._work,', time:', self._time)
+    def toString(self):
+        return 'Work name:' + self._work + ', time:' + str(self._time)
 
 def timeTable(toDoList):
     def odd(n):
@@ -36,13 +38,14 @@ def timeTable(toDoList):
     mark = [[],[],[],[],[],[],[]]
 
     for day in range(DAY_OF_WEEK):
-        works_a_day = len(toDoList[day])
-        n = works_a_day//2
-        if (odd(works_a_day)):
-            work_per_person = sample([n, n + 1], k = 2, counts = [1,1])
-        else:
-            work_per_person = [n, n]
-        mark[day] = sample([True, False], k = works_a_day, counts = work_per_person)
+        if len(toDoList[day]) > 0 :
+            works_a_day = len(toDoList[day])
+            n = works_a_day//2
+            if (odd(works_a_day)):
+                work_per_person = sample([n, n + 1], k = 2, counts = [1,1])
+            else:
+                work_per_person = [n, n]
+            mark[day] = sample([True, False], k = works_a_day, counts = work_per_person)
     
     return mark
 
@@ -64,13 +67,43 @@ def index_day(day):
     elif day == 'Wed': return WED
     elif day == 'Thu': return THU
     elif day == 'Fri': return FRI
-    elif day == 'Sar': return SAR
+    elif day == 'Sat': return SAT
     elif day == 'Sun': return SUN
+def showWho(toDoList, mark):
+    for day in range(DAY_OF_WEEK):
+        if day == MON: print("Monday:")
+        elif day == TUE: print("Tueday:")
+        elif day == WED: print("Wednesday:")
+        elif day == THU: print("Thursday:")
+        elif day == FRI: print("Friday:")
+        elif day == SAT: print("Saturday:")
+        elif day == SUN: print("Sunday:")
+        
+        for who in range(len(mark[day])):
+            if mark[day][who] : person = 'Mother'
+            else: person = 'Father'
+            print(toDoList[day][who].toString() + " -> " + person)
+def showMark(mark):
+    for day in range(DAY_OF_WEEK):
+        print(mark[day])
 def showToDo(toDoList):
     for day in range(DAY_OF_WEEK):
-        print(day,":")
+        if day == MON: print("Monday:")
+        elif day == TUE: print("Tueday:")
+        elif day == WED: print("Wednesday:")
+        elif day == THU: print("Thursday:")
+        elif day == FRI: print("Friday:")
+        elif day == SAT: print("Saturday:")
+        elif day == SUN: print("Sunday:")
         for work in toDoList[day]:
             work.show()
+def showMark(mark):
+    for day in range(DAY_OF_WEEK):
+        print(mark[day])
+def resetToDo():
+    toDoList = [[],[],[],[],[],[],[]]
+def resetMark():
+    mark = list()
 #---------------------begin------------------------
 
 toDoList = [[],[],[],[],[],[],[]]

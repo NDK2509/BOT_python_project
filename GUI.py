@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from Main import *
-from Main import toDoList
 from datetime import *
+
 
 
 def enter():
@@ -17,9 +17,15 @@ def enter():
     
 def divide():
     sortTime(toDoList)
-    showToDo(toDoList)
     mark = timeTable(toDoList)
-    
+    showMark(mark)
+    showWho(toDoList,mark)
+def delete():
+    resetToDo()
+    resetMark()
+    showToDo(toDoList)
+    print(mark)
+    print('Deleted successfully!')
 
 root = Tk();
 root.title("Time Table")
@@ -50,7 +56,7 @@ enter_button = Button(root,
     text='Enter', 
     bg='#e9c46a',
     font = ('Arial', 15),
-    command=enter
+    command = enter
 )
 enter_button.grid(row=3, column=1, columnspan=3, padx=10, pady=10)
 
@@ -59,8 +65,17 @@ divide_button = Button(root,
     bg='#e9c46a',
     font = ('Arial', 15),
     width = 20,
-    command=divide
+    command = divide
 )
-divide_button.grid(row=4, column=1, columnspan=3, padx=10, pady=10)
+divide_button.grid(row=4, column=0, padx=10, pady=10)
+
+delete_button = Button(root, 
+    text='Delete', 
+    bg='#e9c46a',
+    font = ('Arial', 15),
+    width = 20,
+    command = resetToDo, resetMark
+)
+delete_button.grid(row=4, column=5, padx=10, pady=10)
 
 root.mainloop()
