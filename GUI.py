@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-from Main import *
+from Main import Work, addWork, showMark, showToDo, showWho, index_day, sortTime, timeTable
+import Main
 from datetime import *
 
 
@@ -13,18 +14,18 @@ def enter():
     min = int(time_list[1])
     Work(work, time(hour, min)).show()
     for day in day_list:
-        addWork(toDoList, index_day(day), Work(work, time(hour, min)))
+        addWork(Main.toDoList, index_day(day), Work(work, time(hour, min)))
     
 def divide():
-    sortTime(toDoList)
-    mark = timeTable(toDoList)
-    showMark(mark)
-    showWho(toDoList,mark)
+    sortTime(Main.toDoList)
+    mark = timeTable(Main.toDoList)
+    showMark(Main.mark)
+    showWho(Main.toDoList, Main.mark)
 def delete():
-    resetToDo()
-    resetMark()
-    showToDo(toDoList)
-    print(mark)
+    Main.toDoList = [[],[],[],[],[],[],[]]
+    Main.mark = [[],[],[],[],[],[],[]]
+    showToDo(Main.toDoList)
+    print(Main.mark)
     print('Deleted successfully!')
 
 root = Tk();
@@ -74,7 +75,7 @@ delete_button = Button(root,
     bg='#e9c46a',
     font = ('Arial', 15),
     width = 20,
-    command = resetToDo, resetMark
+    command = delete
 )
 delete_button.grid(row=4, column=5, padx=10, pady=10)
 

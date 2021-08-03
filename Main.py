@@ -100,12 +100,8 @@ def showToDo(toDoList):
 def showMark(mark):
     for day in range(DAY_OF_WEEK):
         print(mark[day])
-def resetToDo():
-    toDoList = [[],[],[],[],[],[],[]]
-def resetMark():
-    mark = list()
+
 #---------------------begin------------------------
 
 toDoList = [[],[],[],[],[],[],[]]
-mark = list()
-
+mark = [[],[],[],[],[],[],[]]
