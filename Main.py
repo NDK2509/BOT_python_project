@@ -69,20 +69,7 @@ def index_day(day):
     elif day == 'Fri': return FRI
     elif day == 'Sat': return SAT
     elif day == 'Sun': return SUN
-def showWho(toDoList, mark):
-    for day in range(DAY_OF_WEEK):
-        if day == MON: print("Monday:")
-        elif day == TUE: print("Tueday:")
-        elif day == WED: print("Wednesday:")
-        elif day == THU: print("Thursday:")
-        elif day == FRI: print("Friday:")
-        elif day == SAT: print("Saturday:")
-        elif day == SUN: print("Sunday:")
-        
-        for who in range(len(mark[day])):
-            if mark[day][who] : person = 'Mother'
-            else: person = 'Father'
-            print(toDoList[day][who].toString() + " -> " + person)
+
 def showMark(mark):
     for day in range(DAY_OF_WEEK):
         print(mark[day])
@@ -100,7 +87,20 @@ def showToDo(toDoList):
 def showMark(mark):
     for day in range(DAY_OF_WEEK):
         print(mark[day])
-
+def showWho(toDoList, mark):
+    for day in range(DAY_OF_WEEK):
+        if day == MON: print("Monday:")
+        elif day == TUE: print("Tueday:")
+        elif day == WED: print("Wednesday:")
+        elif day == THU: print("Thursday:")
+        elif day == FRI: print("Friday:")
+        elif day == SAT: print("Saturday:")
+        elif day == SUN: print("Sunday:")
+        
+        for who in range(len(mark[day])):
+            if mark[day][who] : person = 'Mother'
+            else: person = 'Father'
+            print(toDoList[day][who].toString() + " -> " + person)
 #---------------------begin------------------------
 
 toDoList = [[],[],[],[],[],[],[]]
