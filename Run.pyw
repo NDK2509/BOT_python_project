@@ -21,7 +21,7 @@ while (True):
             else:
                 t = datetime.now().time()
                 while not(t.hour == work.getTime().hour and t.minute == work.getTime().minute):
-                    sleep(60)
+                    sleep(30)
                     t = datetime.now().time()
                 mess = work.toString() + (' -> Mother' if Main.mark[day][i] else ' -> Father')
                 notice(mess)
